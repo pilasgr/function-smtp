@@ -11,11 +11,14 @@ function custom_wp_mail_smtp($phpmailer) {
     $phpmailer->SMTPSecure = 'ssl';
     $phpmailer->Port       = 465; //Εδώ βάζετε το SMTP port
 
-    // Επιβεβλημένος αποστολέας
+    // Επιβεβλημένος αποστολέας email
     $phpmailer->From       = 'info@domain.gr'; //Εδώ βάζετε το e-mail του αποστολέα (πχ το info mail σας)
+
+    // Έλεγχος για το όνομα αποστολέα
+    $phpmailer->FromName = !empty($phpmailer->FromName) ? $phpmailer->FromName : 'TO_ONOMA_TOU_APOSTOLEA'; //Εδώ βάζετε το όνομα του αποστολέα αν δεν έχει οριστεί από τη φόρμα
 }
 
 // Προσθέτουμε τη λειτουργία custom_wp_mail_smtp στο hook phpmailer_init
 add_action('phpmailer_init', 'custom_wp_mail_smtp');
 
-//////////////////////////////////////////////////////////////////////////////////////  
+////////////////////////////////////////////
